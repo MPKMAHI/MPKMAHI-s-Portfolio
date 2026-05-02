@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPKMAHI | UI Portfolio</title>
+    <link rel="icon" type="image/svg+xml" href="https://lucide.dev/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0c;
+            --bg-card: rgba(20, 20, 24, 0.6);
+            --border-metallic: linear-gradient(145deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.05) 50%, rgba(0,0,0,0.8) 100%);
+            --text-primary: #f0f0f2;
+            --text-secondary: #9aa0a6;
+            
+            /* Metallic Gradients */
+            --metal-1: linear-gradient(to bottom, #d4d4d8 0%, #71717a 100%);
+            --metal-2: linear-gradient(135deg, #e4e4e7 0%, #a1a1aa 50%, #3f3f46 100%);
+            --metal-3: linear-gradient(to right, #f4f4f5 0%, #d4d4d8 25%, #a1a1aa 50%, #52525b 75%, #27272a 100%);
+            --metal-4: linear-gradient(180deg, #fafafa 0%, #a1a1aa 40%, #18181b 100%);
+            --metal-text: linear-gradient(to bottom, #ffffff 0%, #d4d4d8 40%, #71717a 70%, #27272a 100%);
+            --metal-highlight: linear-gradient(135deg, #ffffff 0%, #e4e4e7 30%, #a1a1aa 70%, #52525b 100%);
+            
+            --font-heading: 'Outfit', system-ui, sans-serif;
+            --font-body: 'Inter', system-ui, sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(255, 255, 255, 0.03), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(255, 255, 255, 0.04), transparent 25%);
+            background-attachment: fixed;
+        }
+
+        .container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+
+        .metallic-text {
+            background: var(--metal-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        .metallic-text-bright {
+            background: var(--metal-highlight);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        header {
+            padding: 1.5rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; letter-spacing: -0.5px; text-decoration: none; }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: color 0.3s ease; }
+        .nav-links a:hover { color: var(--text-primary); }
+
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding-top: 5rem; position: relative; }
+        .hero-content { max-width: 900px; display: flex; flex-direction: column; align-items: center; gap: 1.5rem; z-index: 10; }
+        .badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border-radius: 50px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); backdrop-filter: blur(4px); }
+        .badge-dot { width: 8px; height: 8px; border-radius: 50%; background: #fff; box-shadow: 0 0 10px #fff; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); } 70% { box-shadow: 0 0 0 6px rgba(255, 255, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); } }
+        .hero h1 { font-family: var(--font-heading); font-size: clamp(3rem, 8vw, 6rem); font-weight: 800; line-height: 1.1; letter-spacing: -2px; }
+        .hero p { font-size: clamp(1rem, 2vw, 1.25rem); color: var(--text-secondary); max-width: 600px; }
+        .hero-buttons { display: flex; gap: 1rem; margin-top: 1rem; }
+        
+        .btn { padding: 0.875rem 2rem; border-radius: 8px; font-weight: 600; font-size: 1rem; text-decoration: none; transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; border: none; }
+        .btn-primary { background: var(--metal-3); color: #000; box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15); background: var(--metal-highlight); }
+        .btn-secondary { background: rgba(255, 255, 255, 0.05); color: var(--text-primary); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-2px); }
+
+        .portfolio { padding: 8rem 0; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-header h2 { font-family: var(--font-heading); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; margin-bottom: 1rem; }
+        .section-header p { color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem; }
+        .project-card { background: var(--bg-card); border-radius: 16px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.4s ease; position: relative; cursor: pointer; }
+        .project-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); }
+        .project-img { width: 100%; height: 240px; background: #111; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .project-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .project-card:hover .project-img img { transform: scale(1.05); }
+        .project-info { padding: 1.5rem; }
+        .project-title { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; color: #fff; }
+        .project-category { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem; }
+        
+        /* Modal */
+        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(12px); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 2rem; animation: fadeIn 0.3s ease; }
+        .modal-content { background: #141418; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; width: 100%; max-width: 800px; max-height: 90vh; overflow-y: auto; position: relative; animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .modal-close { position: absolute; top: 1.5rem; right: 1.5rem; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: #fff; cursor: pointer; z-index: 10; transition: transform 0.2s; }
+        .modal-close:hover { transform: rotate(90deg); background: rgba(255, 255, 255, 0.1); }
+        .modal-header { padding: 2rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .modal-image { width: 100%; height: 400px; background: #000; display: flex; align-items: center; justify-content: center; }
+        .modal-image img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .modal-body { padding: 2rem; }
+        .modal-body h3 { margin-bottom: 1rem; font-family: var(--font-heading); font-size: 1.5rem; }
+        .modal-body p { color: var(--text-secondary); line-height: 1.8; font-size: 1.1rem; }
+
+        footer { padding: 4rem 0; border-top: 1px solid rgba(255, 255, 255, 0.05); text-align: center; }
+        .social-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 3.5rem; }
+            .projects-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-content">
+            <a href="#" class="logo metallic-text-bright">MPKMAHI</a>
+            <nav class="nav-links">
+                <a href="#work">Work</a>
+                <a href="#about">About</a>
+                <a href="#inspired">Inspired</a>
+                <a href="#themed">Themed</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero container">
+            <div class="hero-content">
+                <div class="badge"><span class="badge-dot"></span> Available for Commissions</div>
+                <h1><span class="metallic-text">MPKMAHI's</span> Portfolio</h1>
+                <p>Professional Roblox UI Design. I forge premium, highly-responsive, and visually complex user interfaces that elevate your Roblox experiences.</p>
+                <div class="hero-buttons">
+                    <a href="#work" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-secondary">Contact Me</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="work" class="portfolio container">
+            <div class="section-header">
+                <h2><span class="metallic-text">Featured</span> Interfaces</h2>
+                <p>A selection of my best UI designs across various Roblox genres. Built with scale-based layouts.</p>
+            </div>
+            <div id="featured-grid" class="projects-grid"></div>
+        </section>
+
+        <section id="about" class="portfolio container" style="padding-top: 2rem; padding-bottom: 2rem;">
+            <div class="section-header">
+                <h2><span class="metallic-text">About</span> Me</h2>
+                <p id="about-text" style="max-width: 800px; margin: 0 auto; color: var(--text-secondary); font-size: 1.1rem;"></p>
+            </div>
+        </section>
+
+        <section id="inspired" class="portfolio container">
+            <div class="section-header">
+                <h2><span class="metallic-text">Inspired</span> UI</h2>
+                <p>UI designs inspired by major AAA gaming titles, bringing high-end console and PC aesthetics into Roblox.</p>
+            </div>
+            <div id="inspired-grid" class="projects-grid"></div>
+        </section>
+
+        <section id="themed" class="portfolio container">
+            <div class="section-header">
+                <h2><span class="metallic-text">Pacific Drive</span> Theme</h2>
+                <p>Specialized collections of UI systems strictly following the industrial, retro-futuristic aesthetic of Pacific Drive.</p>
+            </div>
+            <div id="themed-grid" class="projects-grid"></div>
+        </section>
+    </main>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2><span class="metallic-text">Let's Work</span> Together</h2>
+                <p>Ready to level up your Roblox UI? Contact me below!</p>
+            </div>
+            <div class="social-links">
+                <a href="https://x.com/MHIDHAR_123" target="_blank" class="btn btn-secondary">X: MAHIDHAR_123</a>
+                <a href="https://discordapp.com/users/1421435274302591066" target="_blank" class="btn btn-primary">Discord: mahidhar0162_59359</a>
+                <a href="https://www.roblox.com/search/users?keyword=MPKMAHI" target="_blank" class="btn btn-primary">Roblox: MPKMAHI</a>
+            </div>
+            <p class="copyright">© 2026 MPKMAHI. Crafted with precision.</p>
+        </div>
+    </footer>
+
+    <div id="modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <div class="modal-header">
+                <h2 id="modal-title" class="metallic-text"></h2>
+                <span id="modal-category" class="project-category"></span>
+            </div>
+            <div class="modal-image">
+                <img id="modal-img" src="" alt="">
+            </div>
+            <div class="modal-body">
+                <h3>About this Interface</h3>
+                <p id="modal-desc"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const projects = [
+            { id: 1, title: 'Neon Store & Settings Hub', category: 'Main Menu System', description: 'This interface features a sleek glassmorphism design with glowing purple accents. The Store section includes level-based unlocks and currency purchasing options.', image: 'public/images/neon_store.png' },
+            { id: 2, title: 'Sci-Fi Simulator Dashboard', category: 'HUD', description: 'A tactical HUD designed for fast-paced simulator games. It includes a dynamic health bar, a circular minimap frame, and stylized neon accents.', image: 'public/images/scifi_hud.png' },
+            { id: 3, title: 'Fantasy RPG Inventory', category: 'Inventory', description: 'A classic medieval fantasy inventory UI. It features a grid-based item slot system with rarity-based border colors and a highly detailed character preview box.', image: 'public/images/rpg_inventory.png' },
+            { id: 4, title: 'Tactical FPS Loadout', category: 'FPS UI', description: 'Minimalist dark theme UI for selecting weapons and attachments. It features interactive weapon stat bars that dynamically update.', image: 'public/images/fps_loadout.png' }
+        ];
+
+        const inspired = [
+            { id: 1, title: 'Holographic RIG Display', inspiredBy: 'Dead Space', image: 'public/images/inspired_deadspace.png', description: 'A holographic health and inventory display recreation inspired by the immersive HUD of Dead Space.' },
+            { id: 2, title: 'Prison Terminal Manual', inspiredBy: 'Redacted', image: 'public/images/inspired_redacted_terminal.jpg', description: 'A gritty, industrial terminal interface recreation featuring stylized folder tabs and monospaced typography inspired by Redacted.' },
+            { id: 3, title: 'Velvet Room Dialogue', inspiredBy: 'Persona 5', image: 'public/images/inspired_persona_dialogue.jpg', description: 'A gothic, high-fidelity dialogue system featuring ornate silver chains, deep blue gradients, and stylized serif typography.' },
+            { id: 4, title: 'Phantom Thief Menu', inspiredBy: 'Persona 5', image: 'public/images/inspired_persona_menu.jpg', description: 'A rebellious, punk-rock inspired settings menu with high-contrast slanted boxes and bold red accents.' }
+        ];
+
+        const themed = [
+            { id: 1, title: 'Pacific Drive Settings', theme: 'Pacific Drive', image: 'public/images/pacific_settings.png', description: 'A comprehensive settings menu featuring retro-industrial aesthetics and analog gameplay controls.' },
+            { id: 2, title: 'Equipment Inventory', theme: 'Pacific Drive', image: 'public/images/pacific_inventory.png', description: 'A minimalist survival hotbar designed for quick access to equipment with industrial keybind labels.' }
+        ];
+
+        const aboutText = "I am a passionate and dedicated Roblox UI Designer with a strong focus on creating high-fidelity, scale-responsive interfaces. With a deep understanding of modern game design aesthetics, I specialize in forging complex menus, HUDs, and shop interfaces that not only look visually stunning but also offer a seamless player experience across all devices. I can work extremely efficiently and rapidly when provided with clear visual references, ensuring a perfect recreation of any desired aesthetic. My goal is to elevate your game's presentation to a truly professional standard.";
+
+        function createCard(item, gridId) {
+            const card = document.createElement('div');
+            card.className = 'project-card';
+            card.onclick = () => openModal(item);
+            card.innerHTML = `
+                <div class="project-img">
+                    <img src="${item.image}" alt="${item.title}" onerror="this.onerror=null; this.src='https://via.placeholder.com/400x240?text=UI+Preview'">
+                </div>
+                <div class="project-info">
+                    <div class="project-category">${item.category || ('Inspired by ' + item.inspiredBy) || (item.theme + ' Theme')}</div>
+                    <h3 class="project-title">${item.title}</h3>
+                    <div class="project-link" style="color: var(--text-primary); font-size: 0.9rem; font-weight: 500;">View Details →</div>
+                </div>
+            `;
+            document.getElementById(gridId).appendChild(card);
+        }
+
+        function openModal(item) {
+            document.getElementById('modal-title').innerText = item.title;
+            document.getElementById('modal-category').innerText = item.category || ('Inspired by ' + item.inspiredBy) || (item.theme + ' Theme');
+            document.getElementById('modal-img').src = item.image;
+            document.getElementById('modal-desc').innerText = item.description;
+            document.getElementById('modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        window.onclick = (e) => { if (e.target == document.getElementById('modal')) closeModal(); }
+
+        document.getElementById('about-text').innerText = aboutText;
+        projects.forEach(p => createCard(p, 'featured-grid'));
+        inspired.forEach(p => createCard(p, 'inspired-grid'));
+        themed.forEach(p => createCard(p, 'themed-grid'));
+    </script>
+</body>
+</html>
